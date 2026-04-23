@@ -1,7 +1,37 @@
 #!/bin/bash
 
-IMAGE_NAME=30727/dev
-TAG=latest
+set -e
 
-docker build -t 30727/dev:$latest .
-docker push 30727/dev:$latest
+DOCKER_USERNAME="30727"
+
+# Force safe tag
+
+TAG=$(date +%s)
+
+# Force branch manually (since Jenkins may not detect)
+
+BRANCH="dev"
+
+echo "Branch: $BRANCH"
+echo "Tag: $TAG"
+
+if [ "$BRANCH" == "dev" ]; then
+REPO="$DOCKER_USERNAME/dev"
+elif [ "$BRANCH" == "master" ]; then
+REPO="$DOCKER_USERNAME/prod"
+else
+echo "Unsupported branch"
+exit 1
+fi
+
+echo "Building image..."
+docker build -t $REPO:$TAG .
+
+echo "Tagging latest..."
+docker tag $REPO:$TAG $REPO:latest
+
+echo "Pushing image..."
+docker push $REPO:$TAG
+docker push $REPO:latest
+
+echo "Done 🚀"

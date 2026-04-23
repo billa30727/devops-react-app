@@ -2,7 +2,7 @@
 
 set -e
 
-DOCKER_USERNAME="30727"
+
 
 # Force safe tag
 

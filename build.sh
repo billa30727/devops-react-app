@@ -17,7 +17,7 @@ echo "Tagging latest..."
 docker tag $REPO:$TAG $REPO:latest
 
 echo "Login to Docker Hub..."
-echo "YOUR_PASSWORD" | docker login -u 30727 --password-Admin@12345
+echo "Admin@12345" | docker login -u 30727 --password-stdin
 
 echo "Pushing image..."
 docker push $REPO:$TAG

@@ -2,13 +2,15 @@
 
 set -e
 
+# Docker username
 
+DOCKER_USERNAME="30727"
 
-# Force safe tag
+# Tag (timestamp)
 
 TAG=$(date +%s)
 
-# Force branch manually (since Jenkins may not detect)
+# Branch (fixed for Jenkins)
 
 BRANCH="dev"
 
@@ -16,9 +18,9 @@ echo "Branch: $BRANCH"
 echo "Tag: $TAG"
 
 if [ "$BRANCH" == "dev" ]; then
-REPO="$DOCKER_USERNAME=30727"
+REPO="$DOCKER_USERNAME/dev"
 elif [ "$BRANCH" == "master" ]; then
-REPO="$DOCKER_USERNAME=30727"
+REPO="$DOCKER_USERNAME/prod"
 else
 echo "Unsupported branch"
 exit 1

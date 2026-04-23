@@ -1,11 +1,18 @@
 #!/bin/bash
 
-IMAGE_NAME=30727/dev
-TAG=latest
+set -e
 
-docker pull 30727:$latest
+IMAGE="30727/dev:latest"
 
-docker stop react-container || true
-docker rm react-container || true
+echo "Stopping old container..."
+docker stop react-app || true
+docker rm react-app || true
 
-docker run -d -p 80:80 --name react-container 30727:$latest
+echo "Pulling latest image..."
+docker pull $IMAGE
+
+echo "Running container..."
+docker run -d -p 80:80 --name react-app $IMAGE
+
+echo "Deployment SUCCESS 🚀"
+

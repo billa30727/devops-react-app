@@ -2,32 +2,26 @@
 
 set -e
 
-# Docker repo (your correct repo)
+# Correct repo
 
 REPO="30727/dev"
 
-# Unique tag
+# Tag
 
 TAG=$(date +%s)
 
-echo "Using repo: $REPO"
-echo "Tag: $TAG"
-
-# Build image
-
-echo "Building Docker image..."
+echo "Building image..."
 docker build -t $REPO:$TAG .
-
-# Tag as latest
 
 echo "Tagging latest..."
 docker tag $REPO:$TAG $REPO:latest
 
-# Push images
+echo "Login to Docker Hub..."
+echo "YOUR_PASSWORD" | docker login -u 30727 --password-Admin@12345
 
 echo "Pushing image..."
 docker push $REPO:$TAG
 docker push $REPO:latest
 
-echo "Build & Push SUCCESS 🚀"
+echo "SUCCESS 🚀"
 

@@ -16,9 +16,9 @@ echo "Branch: $BRANCH"
 echo "Tag: $TAG"
 
 if [ "$BRANCH" == "dev" ]; then
-REPO="$DOCKER_USERNAME/dev"
+REPO="$DOCKER_USERNAME=30727"
 elif [ "$BRANCH" == "master" ]; then
-REPO="$DOCKER_USERNAME/prod"
+REPO="$DOCKER_USERNAME=30727"
 else
 echo "Unsupported branch"
 exit 1

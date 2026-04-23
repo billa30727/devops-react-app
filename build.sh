@@ -4,7 +4,7 @@ set -e
 
 # Docker username
 
-DOCKER_USERNAME="30727"
+docker login -u 30727 -p Admin@12345
 
 # Tag (timestamp)
 

@@ -2,38 +2,32 @@
 
 set -e
 
-# Docker username
+# Docker repo (your correct repo)
 
-docker login -u 30727 -p Admin@12345
+REPO="30727/dev"
 
-# Tag (timestamp)
+# Unique tag
 
 TAG=$(date +%s)
 
-# Branch (fixed for Jenkins)
-
-BRANCH="dev"
-
-echo "Branch: $BRANCH"
+echo "Using repo: $REPO"
 echo "Tag: $TAG"
 
-if [ "$BRANCH" == "dev" ]; then
-REPO="$DOCKER_USERNAME/dev"
-elif [ "$BRANCH" == "master" ]; then
-REPO="$DOCKER_USERNAME/prod"
-else
-echo "Unsupported branch"
-exit 1
-fi
+# Build image
 
-echo "Building image..."
+echo "Building Docker image..."
 docker build -t $REPO:$TAG .
+
+# Tag as latest
 
 echo "Tagging latest..."
 docker tag $REPO:$TAG $REPO:latest
+
+# Push images
 
 echo "Pushing image..."
 docker push $REPO:$TAG
 docker push $REPO:latest
 
-echo "Done 🚀"
+echo "Build & Push SUCCESS 🚀"
+
